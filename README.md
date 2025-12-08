@@ -1,50 +1,50 @@
-<!-- Paste this into README.md — GitHub renders HTML inside markdown -->
 <h1 align="center">TelePorter — Screens</h1>
 
 <div align="center">
-  <img src="images/splash.png" alt="splash" width="480" />
+  <img src="images/splash.png" alt="Splash Screen" style="width:80%;max-width:600px;border-radius:12px;margin-bottom:20px;" />
 </div>
 
-<hr/>
+<!-- Responsive grid for all other screens -->
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;justify-items:center;align-items:start;">
 
-<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:18px;">
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/onb_1.png" alt="onb_1" style="width:100%;border-radius:8px;"/>
-    <figcaption>onb_1</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/onb_1.png" alt="onb_1" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>onb_1</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/onb_2.png" alt="onb_2" style="width:100%;border-radius:8px;"/>
-    <figcaption>onb_2</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/onb_2.png" alt="onb_2" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>onb_2</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/botsetup.png" alt="botsetup" style="width:100%;border-radius:8px;"/>
-    <figcaption>botsetup</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/botsetup.png" alt="botsetup" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>botsetup</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/blacklist.png" alt="blacklist" style="width:100%;border-radius:8px;"/>
-    <figcaption>blacklist</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/blacklist.png" alt="blacklist" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>blacklist</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/home.png" alt="home" style="width:100%;border-radius:8px;"/>
-    <figcaption>home</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/home.png" alt="home" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>home</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/settings.png" alt="settings" style="width:100%;border-radius:8px;"/>
-    <figcaption>settings</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/settings.png" alt="settings" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>settings</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/smsfilter.png" alt="smsfilter" style="width:100%;border-radius:8px;"/>
-    <figcaption>smsfilter</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/smsfilter.png" alt="smsfilter" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>smsfilter</p>
+  </div>
 
-  <figure style="width:200px;text-align:center;margin:0;">
-    <img src="images/smsfilter2.png" alt="smsfilter2" style="width:100%;border-radius:8px;"/>
-    <figcaption>smsfilter2</figcaption>
-  </figure>
+  <div style="text-align:center;">
+    <img src="images/smsfilter2.png" alt="smsfilter2" style="width:100%;max-width:220px;border-radius:12px;" />
+    <p>smsfilter2</p>
+  </div>
+
 </div>
