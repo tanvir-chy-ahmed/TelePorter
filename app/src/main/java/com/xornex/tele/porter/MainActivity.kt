@@ -1,0 +1,33 @@
+package com.xornex.tele.porter
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.rememberNavController
+import com.xornex.tele.porter.ui.navigation.SetUpNavGraph
+import com.xornex.tele.porter.ui.screens.onboarding.controller.OnboardingScreen
+import com.xornex.tele.porter.ui.theme.TelePorterTheme
+import com.xornex.tele.porter.util.OnboardingUtils
+import com.xornex.tele.porter.util.Routes
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    private val onboardingUtils by lazy { OnboardingUtils(this) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+
+        setContent {
+            TelePorterTheme {
+                val navController = rememberNavController()
+               SetUpNavGraph(navController=navController,onboardingUtils=onboardingUtils)
+            }
+        }
+    }
+}
+
+
