@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -109,12 +111,19 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager-indicators:0.34.0")
     implementation("com.google.accompanist:accompanist-pager:0.34.0")
 
-    
-     implementation(libs.androidx.navigation.navigation.compose)
+
+    implementation(libs.androidx.navigation.navigation.compose)
 
 
     implementation("androidx.compose.material:material-icons-extended:1.5.0")
 
+
+    //noinspection NewerVersionAvailable
+    implementation("com.google.accompanist:accompanist-permissions:0.37.3")
+
+    //Okhttp
+    implementation("com.squareup.okhttp3:okhttp:5.3.2")
+    implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
 
 
 }

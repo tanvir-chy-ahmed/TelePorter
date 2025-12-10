@@ -6,10 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.xornex.tele.porter.ui.navigation.SetUpNavGraph
-import com.xornex.tele.porter.ui.screens.onboarding.controller.OnboardingScreen
 import com.xornex.tele.porter.ui.theme.TelePorterTheme
 import com.xornex.tele.porter.util.OnboardingUtils
-import com.xornex.tele.porter.util.Routes
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,10 +22,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             TelePorterTheme {
                 val navController = rememberNavController()
-               SetUpNavGraph(navController=navController,onboardingUtils=onboardingUtils)
+                SetUpNavGraph(
+                    navController = navController,
+                    onboardingUtils = onboardingUtils
+                )
             }
+
+
         }
     }
 }
+
+
+
+
 
 
