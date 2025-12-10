@@ -79,6 +79,7 @@ dependencies {
 
     // Navigation
     implementation("androidx.navigation:navigation-compose")
+    implementation("com.google.accompanist:accompanist-navigation-animation:0.30.1")
 
     // Activity
     implementation("androidx.activity:activity-compose:1.9.0")
@@ -124,6 +125,11 @@ dependencies {
     //Okhttp
     implementation("com.squareup.okhttp3:okhttp:5.3.2")
     implementation("com.squareup.okhttp3:logging-interceptor:5.3.2")
+
+
+    implementation("com.google.accompanist:accompanist-swiperefresh:0.30.1")
+
+
 
 
 }

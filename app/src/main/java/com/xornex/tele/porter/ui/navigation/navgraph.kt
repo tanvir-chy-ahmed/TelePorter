@@ -2,9 +2,11 @@ package com.xornex.tele.porter.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.xornex.tele.porter.domain.repository.SmsRepository
 import com.xornex.tele.porter.ui.screens.botsetup_screen.SetupScreen
 import com.xornex.tele.porter.ui.screens.filters_screen.FilterScreen
 import com.xornex.tele.porter.ui.screens.home_screen.HomeScreen
@@ -52,7 +54,13 @@ fun SetUpNavGraph(navController: NavHostController, onboardingUtils: OnboardingU
         }
 
         // 2. Rest of navigation
-        composable(Routes.home_screen) { HomeScreen(navController = navController) }
+        composable(Routes.home_screen) {
+            HomeScreen(
+                navController = navController, repository = SmsRepository(
+                    LocalContext.current
+                )
+            )
+        }
         composable(Routes.settings_screen) { SettingsScreen(navController = navController) }
         composable(Routes.blacklist_screen) { SmsBlackList(navController = navController) }
         composable(Routes.filter_screen) { FilterScreen(navController = navController) }

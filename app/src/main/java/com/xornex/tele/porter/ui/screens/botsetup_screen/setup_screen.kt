@@ -1,9 +1,7 @@
 package com.xornex.tele.porter.ui.screens.botsetup_screen
 
-import android.Manifest
+import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -53,6 +51,7 @@ import com.xornex.tele.porter.util.Ratio
 @Composable
 fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
 
+
     val scrollState = rememberScrollState()
     var tokentxt by remember { mutableStateOf("") }
     var chatid by remember { mutableStateOf("") }
@@ -69,16 +68,6 @@ fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
         }
     }
 
-    //permission Launcher
-    // Permission Launcher
-    val permissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGranted ->
-            if (isGranted) Toast.makeText(context, "SMS Permission Granted", Toast.LENGTH_SHORT)
-                .show()
-            else Toast.makeText(context, "Permission Denied", Toast.LENGTH_SHORT).show()
-        }
-    )
     // ------------- MAIN SCREEN -------------
     Scaffold(
         modifier = modifier.fillMaxSize(), containerColor = Background,
@@ -169,7 +158,6 @@ fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
                         onClick = {
                             prefs.saveCreds(token = tokentxt, chatID = chatid)
                             Toast.makeText(context, "This is Tanvir", Toast.LENGTH_SHORT).show()
-                            permissionLauncher.launch(Manifest.permission.RECEIVE_SMS)
                             navController.popBackStack()
 
                         })
@@ -182,7 +170,16 @@ fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
                     )
 
                     TextButton(
-                        onClick = {},
+                        onClick = {
+                            /* Clear Shared Pref Logic */
+                            prefs.clearCreds()
+                            Toast.makeText(
+                                context,
+                                "Successfully Clear Saved Setting",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        },
 
                         ) {
                         Text(
