@@ -1,7 +1,6 @@
-package com.xornex.tele.porter.data.local.database
+package com.xornex.tele.porter.data.local.preference
 
 import android.content.Context
-import androidx.core.content.edit
 
 class PrefsManager(context: Context) {
     private val prefs = context.getSharedPreferences("telegram_shared_prefs", Context.MODE_PRIVATE)
@@ -23,7 +22,7 @@ class PrefsManager(context: Context) {
     }
 
 
-    fun clearCreds(){
+    fun clearCreds() {
         prefs.edit().clear().apply()
     }
 }

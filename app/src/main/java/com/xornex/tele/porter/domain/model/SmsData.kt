@@ -4,5 +4,5 @@ data class SmsData(
     val id: String,
     val sender: String,
     val body: String,
-    val date: String
+    val date: String,
 )

@@ -15,7 +15,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.xornex.tele.porter.ui.screens.onboarding.OnboardingOne
 import com.xornex.tele.porter.ui.screens.onboarding.OnboardingThree
@@ -25,7 +24,7 @@ import com.xornex.tele.porter.ui.theme.Background
 import kotlinx.coroutines.launch
 
 @Composable
-fun OnboardingScreen(onFinished: () -> Unit,onSkiped:()->Unit) {
+fun OnboardingScreen(onFinished: () -> Unit, onSkiped: () -> Unit) {
 
     val scope = rememberCoroutineScope()
     val pages = listOf<@Composable () -> Unit>(
@@ -99,10 +98,9 @@ fun OnboardingScreen(onFinished: () -> Unit,onSkiped:()->Unit) {
                 ) {
                     ButtonUi(buttonstate.value[1]) {
                         scope.launch {
-                            if(pagestate.currentPage < pages.size -1)
-                            {
-                                pagestate.animateScrollToPage(pagestate.currentPage +1 )
-                            }else{
+                            if (pagestate.currentPage < pages.size - 1) {
+                                pagestate.animateScrollToPage(pagestate.currentPage + 1)
+                            } else {
                                 onFinished()
                             }
 

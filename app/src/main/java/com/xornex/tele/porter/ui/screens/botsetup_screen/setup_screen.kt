@@ -1,6 +1,5 @@
 package com.xornex.tele.porter.ui.screens.botsetup_screen
 
-import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +25,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,7 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.xornex.tele.porter.data.local.database.PrefsManager
+import com.xornex.tele.porter.data.local.preference.PrefsManager
 import com.xornex.tele.porter.ui.screens.botsetup_screen.widgets.AlertText
 import com.xornex.tele.porter.ui.screens.botsetup_screen.widgets.BotSetupCard
 import com.xornex.tele.porter.ui.screens.botsetup_screen.widgets.BotSetupTextField
@@ -45,6 +45,7 @@ import com.xornex.tele.porter.ui.screens.botsetup_screen.widgets.CustomSetupCard
 import com.xornex.tele.porter.ui.screens.widgets.CustomButton
 import com.xornex.tele.porter.ui.theme.Background
 import com.xornex.tele.porter.util.Ratio
+import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,6 +60,26 @@ fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
     val context = LocalContext.current
     val prefs = remember { PrefsManager(context) }
 
+    val scope = rememberCoroutineScope()
+
+    fun SaveActivate() {
+        scope.launch {
+            if (tokentxt.isNotEmpty() || chatid.isNotEmpty()) {
+                prefs.saveCreds(token = tokentxt, chatID = chatid)
+                Toast.makeText(
+                    context,
+                    "Successfully Saved Token or ChatID",
+                    Toast.LENGTH_SHORT
+                ).show()
+                navController.popBackStack()
+            } else {
+                // var context = LocalContext.current
+                Toast.makeText(context, "Please Enter Token or ChatID", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+    }
 
 
     LaunchedEffect(Unit) {
@@ -112,8 +133,8 @@ fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
             BotSetupCard(
                 title = "Status: Not Connected",
                 subtitle = "Enter your bot details to \nstart forwarding",
-                onClick = {},
-            )
+
+                )
 
             Spacer(Modifier.height(Ratio.h(0.01f)))
             BotSetupTextField(
@@ -156,10 +177,7 @@ fun SetupScreen(modifier: Modifier = Modifier, navController: NavController) {
                     CustomButton(
                         btntxt = "Save & Activate",
                         onClick = {
-                            prefs.saveCreds(token = tokentxt, chatID = chatid)
-                            Toast.makeText(context, "This is Tanvir", Toast.LENGTH_SHORT).show()
-                            navController.popBackStack()
-
+                            SaveActivate()
                         })
 
 

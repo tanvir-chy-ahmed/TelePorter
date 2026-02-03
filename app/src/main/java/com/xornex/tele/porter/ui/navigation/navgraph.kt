@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.xornex.tele.porter.domain.repository.SmsRepository
 import com.xornex.tele.porter.ui.screens.botsetup_screen.SetupScreen
+import com.xornex.tele.porter.ui.screens.details_screen.DetailsScreen
 import com.xornex.tele.porter.ui.screens.filters_screen.FilterScreen
 import com.xornex.tele.porter.ui.screens.home_screen.HomeScreen
 import com.xornex.tele.porter.ui.screens.onboarding.controller.OnboardingScreen
@@ -65,5 +66,6 @@ fun SetUpNavGraph(navController: NavHostController, onboardingUtils: OnboardingU
         composable(Routes.blacklist_screen) { SmsBlackList(navController = navController) }
         composable(Routes.filter_screen) { FilterScreen(navController = navController) }
         composable(Routes.bot_setup_screen) { SetupScreen(navController = navController) }
+        composable(Routes.details_screen) { DetailsScreen(navController = navController) }
     }
 }

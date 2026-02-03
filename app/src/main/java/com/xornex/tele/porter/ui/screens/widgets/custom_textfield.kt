@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -17,6 +16,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.xornex.tele.porter.ui.theme.SkiptxtColor
@@ -37,6 +37,8 @@ fun CustomTxtField(
         TextField(
             value = value,
             onValueChange = onValueChange,
+            visualTransformation = PasswordVisualTransformation(),
+
             modifier = modifier
                 .fillMaxWidth()
                 .height(55.dp),
@@ -56,15 +58,15 @@ fun CustomTxtField(
             singleLine = true,
 
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number,
+                keyboardType = KeyboardType.Text,
                 imeAction = ImeAction.Done
             ),
 
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    // TODO: Enter key pressed
-                }
-            ),
+//            keyboardActions = KeyboardActions(
+//                onDone = {
+//                    // TODO: Enter key pressed
+//                }
+//            ),
 
             colors = TextFieldDefaults.textFieldColors(
                 focusedIndicatorColor = Color.Transparent,

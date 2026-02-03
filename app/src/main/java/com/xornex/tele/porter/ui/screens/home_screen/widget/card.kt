@@ -1,6 +1,7 @@
 package com.xornex.tele.porter.ui.screens.home_screen.widget
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,10 +33,13 @@ import com.xornex.tele.porter.ui.theme.CardColor
 import com.xornex.tele.porter.ui.theme.FailedColor
 import com.xornex.tele.porter.ui.theme.SentColor
 import com.xornex.tele.porter.ui.theme.SkiptxtColor
+import com.xornex.tele.porter.util.Ratio
 
+@SuppressLint("ConfigurationScreenWidthHeight")
 @Composable
 fun HomeScreenCard(
     title: String,
+    onClick:()->Unit,
     time: String,
     subtitle: String,
     isSentSucess: Boolean = true,
@@ -48,6 +52,7 @@ fun HomeScreenCard(
     val timeTextSize = if (screenWidth < 360) 12.sp else 14.sp
 
     Card(
+        onClick = onClick,
         modifier = Modifier
             .padding(horizontal = 12.dp, vertical = 8.dp)
             .fillMaxWidth(),
@@ -82,7 +87,6 @@ fun HomeScreenCard(
                     )
 
                     Row(
-                        modifier = Modifier.fillMaxWidth(0.5f),
                         horizontalArrangement = Arrangement.End
                     ) {
 
@@ -92,7 +96,7 @@ fun HomeScreenCard(
                             tint = if (isSentSucess) SentColor else FailedColor,
                             modifier = Modifier.size(21.dp)
                         )
-                        Spacer(Modifier.width(6.dp))
+                        Spacer(modifier = Modifier.width(Ratio.w(0.01f)))
                         Text(
                             text = if (isSentSucess) "Sent" else "Failed",
                             color = if (isSentSucess) SentColor else FailedColor,

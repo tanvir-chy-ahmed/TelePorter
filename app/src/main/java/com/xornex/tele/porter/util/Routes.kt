@@ -9,4 +9,5 @@ object Routes {
     const val blacklist_screen = "blacklist_screen"
     const val filter_screen = "filter_screen"
     const val bot_setup_screen = "setup_screen"
+    const val details_screen = "details_screen"
 }

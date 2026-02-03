@@ -3,9 +3,11 @@ package com.xornex.tele.porter.ui.screens.home_screen
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.os.Build
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -57,6 +59,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
+import areSmsPermissionsGranted
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.xornex.tele.porter.R
@@ -68,6 +71,7 @@ import com.xornex.tele.porter.util.Routes
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavController, repository: SmsRepository) {
@@ -247,7 +251,6 @@ fun HomeScreen(navController: NavController, repository: SmsRepository) {
             SwipeRefresh(
                 state = swipestate,
                 onRefresh = { refreshSMS() },
-
                 refreshTriggerDistance = 200.dp
             ) {
                 LazyColumn(
@@ -261,7 +264,10 @@ fun HomeScreen(navController: NavController, repository: SmsRepository) {
                             title = sms.sender,
                             subtitle = sms.body,
                             isSentSucess = false,
-                            time = sms.date
+                            time = sms.date,
+                            onClick = {
+                                navController.navigate(Routes.details_screen)
+                            }
                         )
                     }
                 }
@@ -270,11 +276,12 @@ fun HomeScreen(navController: NavController, repository: SmsRepository) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xFFF0F0F0)),
+                    .background(Background),
                 contentAlignment = Alignment.Center
             ) {
                 Card(
                     shape = RoundedCornerShape(12.dp),
+                    colors = CardDefaults.cardColors(Background),
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth()
@@ -288,7 +295,8 @@ fun HomeScreen(navController: NavController, repository: SmsRepository) {
                         Text(
                             text = "Permission Needed",
                             fontSize = 20.sp,
-                            color = Color.Black
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
                         )
                         Spacer(modifier = Modifier.height(12.dp))
                         Text(
@@ -302,7 +310,8 @@ fun HomeScreen(navController: NavController, repository: SmsRepository) {
                                 permissionLauncher.launch(
                                     arrayOf(
                                         Manifest.permission.READ_SMS,
-                                        Manifest.permission.RECEIVE_SMS
+                                        Manifest.permission.RECEIVE_SMS,
+                                        Manifest.permission.POST_NOTIFICATIONS
                                     )
                                 )
                             }
@@ -316,10 +325,3 @@ fun HomeScreen(navController: NavController, repository: SmsRepository) {
     }
 }
 
-fun areSmsPermissionsGranted(context: Context): Boolean {
-    val readSms = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_SMS)
-    val receiveSms = ContextCompat.checkSelfPermission(context, Manifest.permission.RECEIVE_SMS)
-
-    return readSms == PackageManager.PERMISSION_GRANTED &&
-            receiveSms == PackageManager.PERMISSION_GRANTED
-}

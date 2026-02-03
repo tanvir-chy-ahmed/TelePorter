@@ -31,7 +31,7 @@ fun ButtonUi(
         ), shape = RoundedCornerShape(10.dp)
     ) {
         Text(
-            text= title, fontSize = fontsize.sp, style = textStyle
+            text = title, fontSize = fontsize.sp, style = textStyle
         )
 
 

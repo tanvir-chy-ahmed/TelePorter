@@ -31,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
@@ -42,6 +43,7 @@ import com.xornex.tele.porter.ui.theme.CardColor
 @Composable
 fun SettingCard(
     title: String,
+    imgsize : Int = 20,
     subtitle: String? = null,
     color: Color,
     cardColor: Color = CardColor,
@@ -86,7 +88,7 @@ fun SettingCard(
                     Image(
                         painter = painterResource(leading),
                         contentDescription = null,
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(imgsize.dp)
                     )
                 }
             }

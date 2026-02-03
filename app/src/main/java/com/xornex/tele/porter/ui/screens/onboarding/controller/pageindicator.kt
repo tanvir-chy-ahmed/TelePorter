@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -21,18 +20,21 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PageIndicator(
     pageSize: Int,
-    currentPage: Int, selectedColor: Color = Color(0xFF0da6f2),unselectedColor : Color = Color(0xFF0f374b)
+    currentPage: Int,
+    selectedColor: Color = Color(0xFF0da6f2),
+    unselectedColor: Color = Color(0xFF0f374b),
 ) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         repeat(pageSize) {
-            Spacer(Modifier.size(2.5.dp))
-            Box(Modifier
-                .height(14.dp)
-                .width(if(it==currentPage) 24.dp else 16.dp)
-                .clip(RoundedCornerShape(10.dp))
-                .background(color = if(it == currentPage) selectedColor else unselectedColor)
+            Spacer(Modifier.size(6.dp))
+            Box(
+                Modifier
+                    .height(14.dp)
+                    .width(if (it == currentPage) 20.dp else 16.dp)
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(color = if (it == currentPage) selectedColor else unselectedColor)
 
             ) {
 

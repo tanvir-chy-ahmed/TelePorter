@@ -33,8 +33,8 @@ import com.xornex.tele.porter.ui.theme.SkiptxtColor
 fun BotSetupCard(
     title: String,
     subtitle: String? = null,          // optional
-    onClick: () -> Unit = {},
 ) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,7 +51,6 @@ fun BotSetupCard(
             ),
         colors = CardDefaults.cardColors(containerColor = CardColor),
         shape = RoundedCornerShape(15.dp),
-        onClick = onClick
     ) {
         Row(
             modifier = Modifier
@@ -62,7 +61,9 @@ fun BotSetupCard(
 
             // Leading Icon Box
 
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+
+            }) {
                 Icon(
                     imageVector = Icons.Default.CloudOff,
                     contentDescription = null,

@@ -11,22 +11,8 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-class IncomingSmsReceiver(private val smslist: SnapshotStateList<SmsData>): BroadcastReceiver() {
-//    override fun onReceive(context: Context?, intent: Intent?) {
-//        if (intent?.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION || context == null) return
-//
-//        val messages = Telephony.Sms.Intents.getMessagesFromIntent(intent)
-//        val fullmessage =messages.joinToString("") {it.messageBody }
-//        val sdf = SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault())
-//
-//        messages.forEach { sms ->
-//            val sender = sms.displayOriginatingAddress
-//            val body = sms.messageBody
-//            val date = sdf.format(Date(sms.timestampMillis))
-//
-//            smslist.add(0, SmsData(UUID.randomUUID().toString(), sender, body, date))
-//        }
-//    }
+class IncomingSmsReceiver(private val smslist: SnapshotStateList<SmsData>) : BroadcastReceiver() {
+
 
     override fun onReceive(context: Context?, intent: Intent?) {
         if (intent?.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION || context == null) return
